@@ -38,6 +38,7 @@ const Login = () => {
             confirmButtonText: "OK",
           })
           console.log('login success');
+          sessionStorage.setItem("user", JSON.stringify(data));
          
          return ;
         }

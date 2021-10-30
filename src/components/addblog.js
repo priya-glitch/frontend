@@ -25,7 +25,7 @@ import {
 const Blog = () => {
 
   const url = app_config.api_url;
-  const [mystate, setMystate] = useState("not intiliazed");
+  const [mystate, setMystate] = useState(..."");
   const top100Films = [
     { title: 'The Shawshank Redemption', year: 1994 },
     { title: 'The Godfather', year: 1972 },
@@ -38,9 +38,6 @@ const Blog = () => {
 
   const [value, setValue] = useState("**Hello world!!!**");
 
-  
-
-
 
   const blogForm = {
    
@@ -50,15 +47,16 @@ const Blog = () => {
     // heroimage : "",
     data: "",
     published :  new Date(),
-    // author : ""
+    user : (sessionStorage.getItem("user"))
 
   };
 
 
   const blogSubmit = (values) => {
     console.log(values);
-
-
+    console.log(value);
+    console.log(blogForm.user);
+    
     const reqOptions = {
         method: 'POST',
         body: JSON.stringify(values),
@@ -69,11 +67,11 @@ const Blog = () => {
     fetch(url + '/blog/add', reqOptions)
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: 'Video Uploaded Successfully'
+            text: 'Blog Added Successfully'
         })
     })
      
@@ -146,6 +144,8 @@ const Blog = () => {
             variant="filled"
             label=""
             placeholder="Favorites"
+           
+           
           />
         )}
       />
@@ -159,8 +159,6 @@ const Blog = () => {
             <br/> <br/>
                   
 
-                  
-
              
       <MDEditor
         value={value}
@@ -169,6 +167,11 @@ const Blog = () => {
       <MDEditor.Markdown source={value} />
 
     </div>
+
+
+
+
+    
 
                 
 
