@@ -68,13 +68,13 @@ console.log(data);
   return (
     <>
      
-      <Paper>
+      <Paper elevation="MuiPaper-elevation5">
       <Formik initialValues={signupForm} onSubmit={signupSubmit}>
         {({ values, handleSubmit, handleChange }) => (
           <form onSubmit={handleSubmit}>
             <div className="form-group"></div>
             <div className="container2">
-              <div className="container1 ">
+              <div className="container1">
                 <div className="brand-logo ">
         <img src="https://image.flaticon.com/icons/png/128/3237/3237472.png" className="img-fluid " alt=""/>
                 </div>

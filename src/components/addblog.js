@@ -15,6 +15,7 @@ import {
     CardContent,
     Container,
     Box,
+    Grid
     
   } from "@mui/material";
 
@@ -25,7 +26,11 @@ import {
 const Blog = () => {
 
   const url = app_config.api_url;
-  const [mystate, setMystate] = useState(..."");
+  const [thumbnail, setThumbnail] = useState("");
+  const [value, setValue] = useState("**Start writing your Blog here......**");
+  const [mystate, setMystate] = useState("not initialized");
+
+
   const top100Films = [
     { title: 'The Shawshank Redemption', year: 1994 },
     { title: 'The Godfather', year: 1972 },
@@ -35,8 +40,7 @@ const Blog = () => {
     { title: "Schindler's List", year: 1993 },
     { title: 'Pulp Fiction', year: 1994 }
   ];
-
-  const [value, setValue] = useState("**Hello world!!!**");
+  
 
 
   const blogForm = {
@@ -44,18 +48,32 @@ const Blog = () => {
     title : "",
     description : "",
     tags : [],
-    // heroimage : "",
+    thumbnail : "",
     data: "",
-    published :  new Date(),
-    user : (sessionStorage.getItem("user"))
+    published :  new Date().getDate(),
+    author : JSON.parse(sessionStorage.getItem("user")),
+    username : "",
 
   };
 
 
+
+ 
+
+
+
   const blogSubmit = (values) => {
+
+
+    values.data = value;
     console.log(values);
     console.log(value);
-    console.log(blogForm.user);
+    console.log(values.username);
+
+
+    values.thumbnail = thumbnail;
+    values.username = blogForm.author.name;
+    
     
     const reqOptions = {
         method: 'POST',
@@ -78,8 +96,26 @@ const Blog = () => {
     
  }
 
+ const uploadThumbnail = (e) => {
+
+  const selFile = e.target.files[0];
+
+  console.log(selFile);
+
+  const tempForm = new FormData();
+  tempForm.append('file', selFile);
+
+  fetch(url +'/util/uploadfiles', { method: 'POST', body: tempForm })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data);
+          setThumbnail(selFile.name);
+      });
+
+}
+
   return (
-    <Paper classNmae=""> 
+    <Paper elevation="MuiPaper-elevation5"> 
    <Container className="container2">
    <Box
    className="container4"
@@ -153,6 +189,11 @@ const Blog = () => {
  </div>
  <br/>
 
+ <Grid item className="mt-4">
+                     <label >Upload Thumbnail</label>
+                      <input onChange={uploadThumbnail} className="form-control" type="file" />
+  </Grid>
+
 
     <div className="form-group">
             <label> Add Content</label>
@@ -164,16 +205,12 @@ const Blog = () => {
         value={value}
         onChange={setValue}
       />
+     
+      <div className="container">
       <MDEditor.Markdown source={value} />
-
     </div>
 
-
-
-
-    
-
-                
+    </div>
 
                 <br />
                  <button className="button1" type="submit">

@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './components/header';
 import Blog from './components/addblog';
+import BrowseBlog from './components/browseblog';
 import { createTheme, ThemeProvider } from '@mui/material';
 import {useState} from "react";
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/addblog" component={Blog}/>
+          <Route path="/browseblog" component={BrowseBlog}/>
          
 
       </BrowserRouter>

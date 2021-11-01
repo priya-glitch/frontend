@@ -70,7 +70,7 @@ const Login = () => {
  }
 
   return (
-    <Paper>
+    <Paper elevation="MuiPaper-elevation5">
     <div>
       
  

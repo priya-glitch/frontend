@@ -38,6 +38,10 @@ const Header = (props) =>{
             <NavLink to="/addblog" activeClassName="active" className="nav-link">
               Add Blog
             </NavLink>
+          </li>  <li className="nav-item">
+            <NavLink to="/browseblog" activeClassName="active" className="nav-link">
+              Browse Blog
+            </NavLink>
           </li>
          
           
