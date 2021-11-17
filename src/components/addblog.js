@@ -50,7 +50,7 @@ const Blog = () => {
     tags : [],
     thumbnail : "",
     data: "",
-    published :  new Date().getDate(),
+    published :  new Date(),
     author : JSON.parse(sessionStorage.getItem("user")),
     username : "",
 

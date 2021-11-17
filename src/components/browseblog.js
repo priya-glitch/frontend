@@ -1,15 +1,45 @@
 import { Container, Grid, Card, CardMedia, CardContent, Button, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./forms.css";
 import app_config from "../config";
+import  Bootbox  from  'bootbox-react';
 
 const BrowseBlogs = () => {
+
+
+
   const url = app_config.api_url;
 
   
 
   const [browseList, setBrowseList] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [showConfirm, setShowConfirm] = useState(false);
+	const [showAlert, setShowAlert] = useState(false)
+	const [showPrompt, setShowPrompt] = useState(false)
+	
+	const handleConfirm = () => {
+		console.log("You clicked Yes!");
+		return setShowConfirm(false);
+	}
+	
+	const handleCancel = () => {
+		console.log("You clicked No!");
+		return setShowConfirm(false);
+	}
+
+	const handleClose = () => {
+		console.log("You closed Alert!");
+		return setShowAlert(false);
+	}
+
+	const handlePrompt = (result) => {
+		console.log(`User input: ${result}`);
+		return setShowPrompt(false);
+	}
+
 
   const fetchBlogs = () => {
     fetch(url + "/blog/getall")
@@ -27,15 +57,27 @@ const BrowseBlogs = () => {
     fetchBlogs();
   }, []);
 
+
+  
+  
+
   const showBlog = () => {
     if (!loading) {
       return (
+
+        
         <Grid container spacing={4} >
-          {browseList.map((blog) => {
+          {browseList.map((blog,index) => {
               console.log(blog);
+              var model_id='model_id_'+index;
+              var data_target="#"+model_id;
+              
             return (
               <Grid item md={4
               }>
+               
+                            
+
                 <Card>
                
                 <h6>@{blog.username}</h6>
@@ -45,8 +87,10 @@ const BrowseBlogs = () => {
                     image={url + "/" + blog.thumbnail}
                   />
                   <CardContent>
-                    <h2>{blog.title}</h2>
-                    <p>{blog.data}</p>
+
+                    <h2 > {blog.title}</h2>
+
+                    <p><i>{blog.data}</i></p>
                     
                   
                     <p class="card-text">
@@ -55,10 +99,60 @@ const BrowseBlogs = () => {
 
 
 
-                    <Link to={'/addblog' } style={{textDecoration: 'none'}}>
-                        <Button variant="contained"  color="secondary">View</Button>
-                    </Link>
+           
 
+                   
+                        
+                      
+                        
+                       <Button type="button" class="btn btn-primary" data-toggle="modal" data-target={data_target}>
+ View More
+</Button>
+
+
+<div className="modal fade" id={model_id} tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered" role="document">
+    <div className="modal-content">
+<Card>
+      <div className="modal-header">
+
+        <h5 className="modal-title blog_heading" id="exampleModalLongTitle" >{blog.title}</h5>
+        <br/>
+        
+        
+
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div className="modal-body">
+        <div className="container">
+        <CardMedia
+                    component="img"
+
+                    image={url + "/" + blog.thumbnail}
+                  />
+                  
+        </div>
+        <br/>
+        <h4 className="blog_description">{blog.description}</h4>
+        {blog.data}
+        <p class="card-text">
+              <small class="text-muted">Published :  {blog.published}</small>
+            </p>
+
+      </div>
+
+      <div className="modal-footer">
+        <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
+         
+         
+      </div>
+      </Card>
+    </div>
+  </div>
+</div>
                     
                   </CardContent>
 
