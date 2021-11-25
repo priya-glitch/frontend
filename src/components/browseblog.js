@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import "./forms.css";
 import app_config from "../config";
 import  Bootbox  from  'bootbox-react';
+import { styled } from '@mui/material/styles';
+import { margin } from "@mui/system";
+
 
 const BrowseBlogs = () => {
 
@@ -16,29 +19,23 @@ const BrowseBlogs = () => {
   const [browseList, setBrowseList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [showConfirm, setShowConfirm] = useState(false);
-	const [showAlert, setShowAlert] = useState(false)
-	const [showPrompt, setShowPrompt] = useState(false)
-	
-	const handleConfirm = () => {
-		console.log("You clicked Yes!");
-		return setShowConfirm(false);
-	}
-	
-	const handleCancel = () => {
-		console.log("You clicked No!");
-		return setShowConfirm(false);
-	}
 
-	const handleClose = () => {
-		console.log("You closed Alert!");
-		return setShowAlert(false);
-	}
 
-	const handlePrompt = (result) => {
-		console.log(`User input: ${result}`);
-		return setShowPrompt(false);
-	}
+
+
+ 
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
+  }));
 
 
   const fetchBlogs = () => {
@@ -53,9 +50,7 @@ const BrowseBlogs = () => {
       
   };
 
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
+
 
 
   
@@ -71,7 +66,7 @@ const BrowseBlogs = () => {
               console.log(blog);
               var model_id='model_id_'+index;
               var data_target="#"+model_id;
-              
+              var tag= blog.tags;
             return (
               <Grid item md={4
               }>
@@ -90,7 +85,7 @@ const BrowseBlogs = () => {
 
                     <h2 > {blog.title}</h2>
 
-                    <p><i>{blog.data}</i></p>
+                    <p className="limit-text"> <i>{blog.data}</i></p>
                     
                   
                     <p class="card-text">
@@ -106,7 +101,7 @@ const BrowseBlogs = () => {
                       
                         
                        <Button type="button" class="btn btn-primary" data-toggle="modal" data-target={data_target}>
- View More
+ Read More
 </Button>
 
 
@@ -116,8 +111,9 @@ const BrowseBlogs = () => {
 <Card>
       <div className="modal-header">
 
-        <h5 className="modal-title blog_heading" id="exampleModalLongTitle" >{blog.title}</h5>
+        <h2 className="modal-title blog_heading" id="exampleModalLongTitle" >{blog.title}</h2>
         <br/>
+
         
         
 
@@ -128,6 +124,7 @@ const BrowseBlogs = () => {
 
       <div className="modal-body">
         <div className="container">
+
         <CardMedia
                     component="img"
 
@@ -135,14 +132,28 @@ const BrowseBlogs = () => {
                   />
                   
         </div>
-        <br/>
+        <br/>      <p className="blog-username">@{blog.username}</p>
+
         <h4 className="blog_description">{blog.description}</h4>
-        {blog.data}
+        <Item>{blog.data}</Item>
         <p class="card-text">
+
               <small class="text-muted">Published :  {blog.published}</small>
             </p>
 
+            <p class="font-weight-normal ">
+             
+                 Tags :
+                {tag.map(some => {
+                  return(
+                <small className="tags text-uppercase">  {some.title} </small>)
+
+                })}
+              
+            </p>
+
       </div>
+      
 
       <div className="modal-footer">
         <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
@@ -174,7 +185,7 @@ const BrowseBlogs = () => {
      
        <h1 className="brand-title">BROWSE BLOGS </h1>
       
-      <hr />
+      <hr /><br/>
 
       {showBlog()}
     </Container>

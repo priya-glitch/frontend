@@ -87,7 +87,7 @@
   margin-top: 30px;
 }
 
-.label1, .input1, .button1 {
+.label1, .input1, .button1 , .button2, .input3{
   display: block;
   width: 100%;
   padding: 0;
@@ -117,10 +117,18 @@
   border-radius: 50px;
   box-shadow: inset 6px 6px 6px #cbced143, inset -6px -6px 6px #cbced14f;
 }
+.input1:hover{
+  box-shadow: inset 6px 6px 6px #cbced143, inset -6px -6px 6px #cbced1;
+
+}
+
+
+
+
 
 .button1 {
   margin-top: 20px;
-  background: #1DA1F2;
+  background: rgb(0, 162, 255);
   height: 40px;
   border-radius: 20px;
   cursor: pointer;
@@ -132,6 +140,24 @@
 .button1:hover {
   box-shadow: none;
 }
+
+
+.button2 {
+  margin-top: 20px;
+  color:white;
+  background: #ff4704;
+  height: 50px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced13c;
+  transition: 0.5s;
+}
+
+.button2:hover {
+  box-shadow: none;
+}
+
 
 .atag {
   position: absolute;
@@ -162,13 +188,37 @@ h6{
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    margin-top: 10px !important;
-    padding: 20px 20px !important;
+    padding: 2px 20px !important;
     font-weight: 500 !important;
-    font-size: 1.50em !important;
+    font-size: 1.80em !important;
     letter-spacing: 1px !important;
 }
 
+.blog-username{
+  
+  font-weight: bold;
+  color: rgb(56, 122, 223);
+}
+
+.tags{
+   border-radius: 40px;
+   font-size: 11px;
+   border: 1px solid grey;
+   margin:  5px;
+   padding: 3px ;
+   box-shadow: inset 6px 6px 6px #cbced118, inset -6px -6px 6px #cbced113;
+
+}
+
+
+.limit-text{
+  display: block;
+  height: 150px;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+
+}
 
 
 

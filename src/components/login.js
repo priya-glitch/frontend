@@ -38,7 +38,7 @@ const Login = () => {
             confirmButtonText: "OK",
           })
           console.log('login success');
-          sessionStorage.setItem("user", JSON.stringify(data));
+          sessionStorage.setItem("users", JSON.stringify(data));
          
          return ;
         }
@@ -89,7 +89,7 @@ const Login = () => {
                   <label> Email</label>
                   <input
                     type="text"
-                    className="form-control input1"
+                    className="input1"
                     id="email"
                     placeholder="Enter Username"
                     value={values.email}
@@ -101,7 +101,7 @@ const Login = () => {
                   <label>Password</label>
                   <input
                     type="password"
-                    className="form-control input1"
+                    className="input1"
                     id="password"
                     placeholder="Password"
                     value={values.password}
