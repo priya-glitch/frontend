@@ -135,7 +135,7 @@ const BrowseBlogs = () => {
         <br/>      <p className="blog-username">@{blog.username}</p>
 
         <h4 className="blog_description">{blog.description}</h4>
-        <Item>{blog.data}</Item>
+        <Item style={{fontSize:"16px"}}>{blog.data}</Item>
         <p class="card-text">
 
               <small class="text-muted">Published :  {blog.published}</small>
